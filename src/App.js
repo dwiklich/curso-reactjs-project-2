@@ -1,23 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  // const [reverse, setReverse] = useState(false);
+  const [counter, setCounter] = useState(0);
+  const [counter2, setCounter2] = useState(0);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="container">
+        <p>conter1 : {counter}</p>
+        <p>conter2 : {counter2}</p>
+
+        <button
+          onClick={() => {
+            setCounter((prevReverse) => prevReverse + 1);
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          +
+        </button>
+        <button
+          onClick={() => {
+            setCounter2((prevReverse) => prevReverse + 1);
+          }}
+        >
+          + (2)
+        </button>
+      </div>
     </div>
   );
 }
