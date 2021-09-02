@@ -1,35 +1,16 @@
-import P from 'prop-types';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+// import P from 'prop-types';
+import React, { useMemo } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
 import './App.css';
-
-const Post = ({ post, onClick }) => {
-  console.log('Filho renderizou');
-  return (
-    <div key={post.id} className="post">
-      <h1
-        onClick={() => {
-          onClick(post.title);
-        }}
-      >
-        {post.title}
-      </h1>
-      <p>{post.body}</p>
-    </div>
-  );
-};
-
-Post.propTypes = {
-  post: P.shape({
-    id: P.number,
-    title: P.string,
-    body: P.string,
-  }),
-  onClick: P.func.isRequired,
-};
+import { Posts } from './components/Posts';
+import { AppContext } from './context/App';
+import { globalState } from './context/App/data';
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [value, setValue] = useState('');
+  const [contextState, setContextState] = useState(globalState);
 
   // useRef - seta o valor o elemento do document.DOM, para manipula-los.
   const input = useRef(null);
@@ -59,17 +40,16 @@ function App() {
         {/* ref={} seta o elemento da DOM, */}
         <input ref={input} type="search" value={value} onChange={(e) => setValue(e.target.value)} />
       </p>
-
       {/* useMemo - memoriza componentes, sem re-renderizar caso o pai atualize, porem o compomente do useMemo renderiza se as dependencias mudarem */}
-      {useMemo(() => {
-        return (
-          posts.length > 0 &&
-          posts.map((post) => {
-            return <Post key={post.id} post={post} onClick={handleRef} />;
-          })
-        );
-      }, [posts, handleRef])}
-      {posts.length <= 0 && <p>Ainda não existem posts.</p>}
+
+      {/* <Posts posts={posts} /> */}
+      {/* <GlobalContext.Provider value={{ contextState, setContextState }}> */}
+      <AppContext value={{ contextState, setContextState }}>
+        {useMemo(() => {
+          return <Posts posts={posts} handleRef={handleRef} />;
+        }, [posts, handleRef])}
+        {/* <Posts posts={posts} handleRef={handleRef} /> */}
+      </AppContext>
     </div>
   );
 }
