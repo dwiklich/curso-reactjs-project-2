@@ -47,11 +47,9 @@ function App() {
         {/* ref={} seta o elemento da DOM, */}
         <input ref={input} type="search" value={value} onChange={(e) => setValue(e.target.value)} />
       </p>
-      {/* useMemo - memoriza componentes, sem re-renderizar caso o pai atualize, porem o compomente do useMemo renderiza se as dependencias mudarem */}
 
-      {/* <Posts posts={posts} /> */}
-      {/* <GlobalContext.Provider value={{ contextState, setContextState }}> */}
       <AppContext value={{ contextState, setContextState }}>
+        {/* useMemo - memoriza componentes, sem re-renderizar caso o pai atualize, porem o compomente do useMemo renderiza se as dependencias mudarem */}
         {useMemo(() => {
           return <Posts posts={posts} handleRef={handleRef} />;
         }, [posts, handleRef])}
