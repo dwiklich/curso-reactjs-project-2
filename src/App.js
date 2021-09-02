@@ -6,6 +6,7 @@ import './App.css';
 import { Posts } from './components/Posts';
 import { AppContext } from './context/App';
 import { globalState } from './context/App/data';
+import { loadPosts } from './utils/loadPosts';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -18,10 +19,16 @@ function App() {
   console.log('Pai renderizou!');
 
   // Component did mount
+  // useEffect(() => {
+  //   fetch('https://jsonplaceholder.typicode.com/posts')
+  //     .then((r) => r.json())
+  //     .then((r) => setPosts(r));
+  // }, []);
+
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then((r) => r.json())
-      .then((r) => setPosts(r));
+    loadPosts().then((r) => {
+      setPosts(r);
+    });
   }, []);
 
   const handleRef = useCallback((value) => {
@@ -48,7 +55,6 @@ function App() {
         {useMemo(() => {
           return <Posts posts={posts} handleRef={handleRef} />;
         }, [posts, handleRef])}
-        {/* <Posts posts={posts} handleRef={handleRef} /> */}
       </AppContext>
     </div>
   );
