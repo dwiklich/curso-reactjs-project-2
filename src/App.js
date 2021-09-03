@@ -7,12 +7,15 @@ import { Posts } from './components/Posts';
 import { AppContext } from './context/App';
 import { globalState } from './context/App/data';
 import { loadPosts } from './utils/loadPosts';
+import { MyHookComponent } from './components/MyHookComponent';
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [value, setValue] = useState('');
   // const [contextState, setContextState] = useState(globalState);
   const [contextState, setContextState] = useState(globalState);
+
+  const useMyHook = () => {};
 
   // useRef - seta o valor o elemento do document.DOM, para manipula-los.
   const input = useRef(null);
@@ -49,12 +52,15 @@ function App() {
         <input ref={input} type="search" value={value} onChange={(e) => setValue(e.target.value)} />
       </p>
 
-      <AppContext value={{ contextState, setContextState }}>
-        {/* useMemo - memoriza componentes, sem re-renderizar caso o pai atualize, porem o compomente do useMemo renderiza se as dependencias mudarem */}
+      {/* useMemo - memoriza componentes, sem re-renderizar caso o pai atualize, porem o compomente do useMemo renderiza se as dependencias mudarem */}
+      {/* <AppContext value={{ contextState, setContextState }}>
         {useMemo(() => {
           return <Posts posts={posts} handleRef={handleRef} />;
         }, [posts, handleRef])}
-      </AppContext>
+      </AppContext> */}
+
+      <MyHookComponent value={'Testing of MyHook'}></MyHookComponent>
+      <p>b</p>
     </div>
   );
 }
