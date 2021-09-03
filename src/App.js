@@ -1,5 +1,5 @@
 // import P from 'prop-types';
-import React, { useMemo } from 'react';
+import React, { useMemo, useReducer } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import './App.css';
@@ -11,6 +11,7 @@ import { loadPosts } from './utils/loadPosts';
 function App() {
   const [posts, setPosts] = useState([]);
   const [value, setValue] = useState('');
+  // const [contextState, setContextState] = useState(globalState);
   const [contextState, setContextState] = useState(globalState);
 
   // useRef - seta o valor o elemento do document.DOM, para manipula-los.

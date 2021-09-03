@@ -1,4 +1,5 @@
 export const globalState = {
-  msgAdmin: 'conteúdo ADM',
-  counter: 0,
+  titulo: 'Titulo Global',
+  msgAdmin: 'titulo clicado',
+  counter: 100,
 };

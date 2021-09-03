@@ -1,4 +1,5 @@
 import P from 'prop-types';
+import { useMemo } from 'react';
 import { Body } from '../Body';
 import { Title } from '../Title';
 
@@ -9,11 +10,18 @@ export const Post = ({ post, onClick }) => {
 
   return (
     <div key={post.id} className="post">
-      <Title onClick={onClick} title={post.title} />
+      {/* <Title onClick={onClick} title={post.title} /> */}
       {/* {post.title} */}
 
-      <Body body={post.body} />
-      <p>{post.body}</p>
+      {useMemo(() => {
+        return <Title onClick={onClick} title={post.title} />;
+      }, [post.title, onClick])}
+
+      {useMemo(() => {
+        return <Body body={post.body} />;
+      }, [post.body])}
+
+      {/* <p>{post.body}</p> */}
     </div>
   );
 };

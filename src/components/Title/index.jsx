@@ -10,7 +10,7 @@ export const Title = ({ onClick, title }) => {
   const textContent = useContext(GlobalContext);
   // console.log(textContent);
   const {
-    state: { msgAdmin, counter },
+    state: { msgAdmin, counter, titulo },
     setState,
   } = textContent;
 
@@ -22,7 +22,6 @@ export const Title = ({ onClick, title }) => {
         // alert(msgAdmin + ': ' + title);
         text === msgAdmin ? setText(title) : setText(msgAdmin);
 
-        setState((prevState) => ({ ...prevState, counter: counter + 1 }));
         onClick(title);
       }}
     >
